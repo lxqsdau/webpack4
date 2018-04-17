@@ -1,21 +1,25 @@
-// import _ from 'lodash';
-import './style.css'
+import _ from 'lodash';
 
-function component() {
+
+ function component() {
     var element = document.createElement('div');
-  
-    // Lodash, now imported by this script
-    // element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.innerHTML = 'Hello webpack4';
-    element.classList.add('hello');
+  var button = document.createElement('button');
+  var br = document.createElement('br');
+
+ button.innerHTML = 'Click me and lookfe dddat the e console!';
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.appendChild(br);
+  element.appendChild(button);
+
+// Note that because a network request is involved, some indication
+  // of loading would need to be shown in a production-level site/app.
+ button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
+    var print = module.default;
+
+    print();
+  });
+
     return element;
-}
-  
-document.body.appendChild(component());
+  }
 
-
-
-
-
-
-
+ document.body.appendChild(component());
